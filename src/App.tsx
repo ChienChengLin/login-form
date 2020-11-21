@@ -21,9 +21,15 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
-  overflow: hidden;
+
+  @media only screen and (max-width: 320px) {
+    height: auto;
+    align-items: flex-start;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
 `;
 
 const LoginWrapper = styled.div`
@@ -31,10 +37,13 @@ const LoginWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 320px;
-  max-width: 100%;
   padding: 20px 15px 0;
   border-radius: 6px;
   box-shadow: 0 2px 4px 0 #c5cbce;
+
+  @media only screen and (max-width: 320px) {
+    width: 100%;
+  }
 `;
 
 const BackgroundWrapper = styled.div`
