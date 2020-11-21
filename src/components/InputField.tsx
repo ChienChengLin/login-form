@@ -2,6 +2,7 @@ import React, { FC, useState } from "react";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
+import FormHelperText from "@material-ui/core/FormHelperText";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Divider from "@material-ui/core/Divider";
 import MailOutlineOutlinedIcon from "@material-ui/icons/MailOutlineOutlined";
@@ -33,6 +34,8 @@ type Props = {
   prefixIcon?: React.ComponentType;
   postfixLinkTitle?: string;
   onClickPostfixLink?: (event: React.MouseEvent<HTMLElement>) => void;
+  isValid?: boolean;
+  helperText?: string;
 };
 
 const InputField: FC<Props> = ({
@@ -42,7 +45,9 @@ const InputField: FC<Props> = ({
   type = "email",
   prefixIcon: PrefixIcon = MailOutlineOutlinedIcon,
   postfixLinkTitle,
-  onClickPostfixLink
+  onClickPostfixLink,
+  isValid = true,
+  helperText
 }) => {
   const theme = useTheme();
   const [isFocused, setIsFocused] = useState(false);
@@ -53,6 +58,7 @@ const InputField: FC<Props> = ({
       fullWidth
       variant="outlined"
       size="medium"
+      error={!isValid}
       style={{ margin: "10px 0" }}
     >
       <InputLabel
@@ -102,6 +108,9 @@ const InputField: FC<Props> = ({
           )
         }
       />
+      {!isValid && (
+        <FormHelperText id="component-error-text">{helperText}</FormHelperText>
+      )}
     </FormControl>
   );
 };

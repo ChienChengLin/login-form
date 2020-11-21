@@ -9,8 +9,9 @@ import Description from "./components/Descriptiton";
 import InputField from "./components/InputField";
 import Link from "./components/Link";
 import Button from "./components/Button";
-import { AccountType } from "./constants/terms";
 import { theme } from "./styles/theme";
+import { AccountType } from "./constants/terms";
+import { loginValidation } from "./utils/auth";
 
 import { ReactComponent as DoctorLogo } from "./assets/img_doctor_90@3x.svg";
 import { ReactComponent as PatientLogo } from "./assets/img_patient_90@3x.svg";
@@ -47,6 +48,8 @@ export default function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const isPasswordValid = loginValidation(email, password);
+
   return (
     <ThemeProvider theme={theme}>
       <Container>
@@ -81,6 +84,8 @@ export default function App() {
             prefixIcon={LockOutlinedIcon}
             postfixLinkTitle="Forgot?"
             onClickPostfixLink={() => {}}
+            isValid={isPasswordValid}
+            helperText="Any consecutive 6 charachers of the password shouldn't be the same as any consecutive 6 digits of the email."
           />
           <Grid
             container
